@@ -1,16 +1,21 @@
 #include "data_io.h"
+#include <stdio.h>
 
-void input(double *data, int n){}
-//     for (int *p = data; p - data < *n; p++) {
-//             scanf("%lf", p);
+int input(double *data, int n) {
+    int flag = 1;
+    for (int i = 0; i < n; i++) {
+        if ( !scanf("%lf", &data[i])) {
+            flag = 0;
+            break;
+        }
+    }
+    return flag;
+}
 
-// }
+void output(double *data, int n) {
 
-
-void output(double *data, int n){}
-//     int *p;
-//     for (p = a; p - a < n - 1; p++) {
-//         printf("%.2Lf ", *p);
-//     }
-//     printf("%.2Lf", *p);
-// }
+    for (int i = 0; i < n - 1; i++) {
+        printf("%.2lf ", data[i]);
+    };
+    printf("%.2lf", data[n - 1]);
+}

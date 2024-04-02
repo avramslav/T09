@@ -1,18 +1,19 @@
 
 
-main : data_module_entry.o data_io.o
-	gcc -Wall -Werror -Wextra data_module_entry.o  -o main
+main : entry.o io.o process.o stat.o
+	gcc -Wall -Werror -Wextra entry.o io.o process.o stat.o  -o main
 
-data_io.o: ../data_libs/data_io.c	../data_libs/data_io.h
-	gcc -std=c11 -Wall -Werror -Wextra -c ../data_libs/data_io.c
+io.o: ../data_libs/data_io.c	../data_libs/data_io.h
+	gcc -std=c11 -Wall -Werror -Wextra -c ../data_libs/data_io.c -o io.o
 
-data_stat.o: data_libs/data_stat.c data_libs/data_stat.h
-	gcc -std=c11 -Wall -Werror -Wextra -c data_libs/data_stat.c 
+stat.o: ../data_libs/data_stat.c ../data_libs/data_stat.h
+	gcc -std=c11 -Wall -Werror -Wextra -c ../data_libs/data_stat.c -o stat.o
 
-data_process.o:	data_process.c data_process.h data_libs/data_stat.h
-	gcc -std=c11 -Wall -Werror -Wextra -c data_process.c
+process.o:	data_process.c data_process.h ../data_libs/data_stat.h
+	gcc -std=c11 -Wall -Werror -Wextra -c data_process.c -o process.o
 
-data_module_enty.o: data_module_entry.c data_process.h data_libs/data_io.h
-	gcc -std=c11 -Wall -Werror -Wextra -c data_module_entry.c 
+entry.o: data_module_entry.c
+	gcc -std=c11 -Wall -Werror -Wextra -c data_module_entry.c  -o entry.o
 
-clear: rm -rf *.o main
+clear:
+	rm -rf  *.o main
